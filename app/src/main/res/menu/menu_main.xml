@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/group_pengaturan">
+        <item
+            android:id="@+id/action_pengaturan"
+            android:icon="@drawable/ic_settings"
+            android:title="Pengaturan">
+            <menu>
+                <item
+                    android:id="@+id/action_privasi"
+                    android:title="Privasi" />
+                <item
+                    android:id="@+id/action_notifikasi"
+                    android:title="Notifikasi" />
+            </menu>
+        </item>
+    </group>
+    <item
+        android:id="@+id/action_cari"
+        android:icon="@drawable/ic_search"
+        android:title="Cari"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_profil"
+        android:icon="@drawable/ic_profile"
+        android:title="Profil"
+        app:showAsAction="ifRoom" />
+</menu>
