@@ -7,10 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.appcompat.widget.Toolbar
 
 
@@ -27,6 +24,17 @@ class MainActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.textView)
         registerForContextMenu(textView)
     }
+
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menuInflater.inflate(R.menu.menu_context, menu)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -56,17 +64,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         val pengaturanGroup = menu.findItem(R.id.group_pengaturan)
-        // Contoh kondisi, bisa disesuaikan
-        val isUserLoggedIn = true
-        pengaturanGroup.isVisible = isUserLoggedIn
+        // Pastikan pengaturanGroup tidak null
+        pengaturanGroup?.let {
+            val isUserLoggedIn = true // Ganti dengan logika login yang sesuai
+            it.isVisible = isUserLoggedIn
+        }
+
+        // Jika kamu ingin mengubah visibilitas item dalam submenu
+        val privasiItem = menu.findItem(R.id.action_privasi)
+        privasiItem?.let {
+            it.isVisible = true // Atur sesuai kondisi kamu
+        }
+
+        val notifikasiItem = menu.findItem(R.id.action_notifikasi)
+        notifikasiItem?.let {
+            it.isVisible = true // Atur sesuai kondisi kamu
+        }
+
         return super.onPrepareOptionsMenu(menu)
     }
 
-
-    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-        menuInflater.inflate(R.menu.menu_context, menu)
-    }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
